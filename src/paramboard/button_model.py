@@ -43,4 +43,4 @@ class ButtonModel:
         self.state = new_state
         self.state_transition_callback(new_state)
         if(new_state == ButtonState.SuccessfulChange or new_state == ButtonState.Error):
-            Clock.schedule_once(lambda dt: self.transition_states(ButtonState.Default), 2)
+            Clock.schedule_once(lambda dt: self.transition_states(ButtonState.Default), 0.4)
