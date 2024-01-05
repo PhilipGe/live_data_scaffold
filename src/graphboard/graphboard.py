@@ -1,11 +1,12 @@
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
-from kivy.garden.graph import Graph, MeshLinePlot
+from kivy.garden.graph import MeshLinePlot, Graph
 from kivy.uix.label import Label
-
-from graphboard.graph_model import GraphModel
-from graphboard.plot_model import PlotModel
 from kivy.uix.gridlayout import GridLayout
+
+from graphboard.graph.graph_model import GraphModel
+from graphboard.graph.stream import PointStream 
+from graphboard.graph.graph_tile import GraphTile
 
 class GraphBoard(BoxLayout):
     
@@ -17,22 +18,16 @@ class GraphBoard(BoxLayout):
 
         self.graphs = []
 
-        for graph in graph_models:
-            self.add_widget(Label(text=graph.title, height=50, size_hint_y=None))
+        for graph_model in graph_models:
+            self.add_widget(Label(text=graph_model.title, height=50, size_hint_y=None))
 
-            self.graphs.append(Graph(
-                xlabel = graph.x_label,
-                ylabel = graph.y_label,
-                xmin = graph.x_bounds[0],
-                xmax = graph.x_bounds[1],
-                ymin = graph.y_bounds[0],
-                ymax = graph.y_bounds[1],
-                padding = 2
-            ))
+            tile = GraphTile(graph_model)
 
-            self.add_widget(self.graphs[-1])
+            self.graphs.append(tile.graph)
 
-            for plot in graph.plots:
-                m = MeshLinePlot(color=plot.color)
-                plot.attach_meshlineplot(m)
-                self.graphs[-1].add_plot(m)
+            self.add_widget(tile)
+
+            for stream in graph_model.streams:
+                m = MeshLinePlot(color=stream.color)
+                stream.attach_meshlineplot(m)
+                tile.graph.add_plot(m)

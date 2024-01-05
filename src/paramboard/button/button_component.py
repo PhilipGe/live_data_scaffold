@@ -1,6 +1,6 @@
 from enum import Enum
 from kivy.uix.boxlayout import BoxLayout
-from paramboard.button_model import ButtonModel, ButtonState
+from paramboard.button.button_model import ButtonModel, ButtonState
 from kivy.uix.button import Button
 
 class ButtonComponent(Button):

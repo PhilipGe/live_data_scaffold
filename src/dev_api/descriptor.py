@@ -7,11 +7,11 @@ from threading import Thread, Event
 from homepage.home import HomePage
 
 import numpy as np
-from paramboard.parameter_model import ParameterModel, ParamState
-from paramboard.button_model import ButtonModel
-from graphboard.graph_model import GraphModel
-from graphboard.plot_model import PlotModel
-from graphboard.graph_colors import GraphColors
+from paramboard.parameter.parameter_model import ParameterModel, ParamState
+from paramboard.button.button_model import ButtonModel
+from graphboard.graph.graph_model import GraphModel
+from graphboard.graph.stream import PointStream
+from graphboard.graph.graph_colors import GraphColors
 
 class SensorPlotter(App):
 
@@ -31,7 +31,7 @@ class AppBuilder:
 
         self.indicator_streams: list[Callable[[],None]] = []
         self.point_stream: list[Callable[[],None]] = []
-        # self.plot_streams: Callable[[*PlotModel], None] = []
+        # self.plot_streams: Callable[[*PointStream], None] = []
 
         self.num_graphs: int = 0
         self.streams: list[Callable[[], np.array]] = []
@@ -91,7 +91,7 @@ class AppBuilder:
         g = g_list[0]
 
         g.add_plot(
-            PlotModel(point_stream, poll_interval_s, cumulative, max_num_points, color=GraphColors.get_next_plot_color())
+            PointStream(point_stream, poll_interval_s, cumulative, max_num_points, color=GraphColors.get_next_plot_color())
         )
 
     def build_app(self) -> App:

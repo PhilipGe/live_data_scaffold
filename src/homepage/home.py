@@ -5,11 +5,11 @@ from kivy.lang import Builder
 from kivy.event import EventDispatcher
 
 from graphboard.graphboard import GraphBoard
-from paramboard.parameter_component import ParameterComponent
-from paramboard.parameter_model import ParameterModel
-from paramboard.button_model import ButtonModel
+from paramboard.parameter.parameter_component import ParameterComponent
+from paramboard.parameter.parameter_model import ParameterModel
+from paramboard.button.button_model import ButtonModel
 from paramboard.paramboard import ParamBoard
-from graphboard.graph_model import GraphModel
+from graphboard.graph.graph_model import GraphModel
 
 class HomePage(BoxLayout, EventDispatcher):
     

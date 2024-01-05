@@ -2,14 +2,14 @@ from threading import Thread
 from typing import Callable
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.gridlayout import GridLayout
-from paramboard.parameter_model import ParameterModel
-from paramboard.button_model import ButtonModel
-from paramboard.button_component import ButtonComponent
+from paramboard.parameter.parameter_model import ParameterModel
+from paramboard.button.button_model import ButtonModel
+from paramboard.button.button_component import ButtonComponent
 from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.clock import Clock
 
-from paramboard.parameter_component import ParameterComponent
+from paramboard.parameter.parameter_component import ParameterComponent
 
 class ParamBoard(BoxLayout):
 

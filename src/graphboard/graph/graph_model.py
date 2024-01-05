@@ -1,4 +1,4 @@
-from graphboard.plot_model import PlotModel
+from graphboard.graph.stream import PointStream
 
 class GraphModel:
 
@@ -8,10 +8,10 @@ class GraphModel:
         self.y_label = y_label
         self.x_bounds = x_bounds
         self.y_bounds = y_bounds
-        self.plots: list[PlotModel] = []
+        self.streams: list[PointStream] = []
 
-    def add_plot(self, plot: PlotModel):
-        self.plots.append(plot)
+    def add_plot(self, plot: PointStream):
+        self.streams.append(plot)
 
     def initiate_plot_streams(self):
-        for plot in self.plots: plot.initiate_stream()
+        for stream in self.streams: stream.initiate_stream()

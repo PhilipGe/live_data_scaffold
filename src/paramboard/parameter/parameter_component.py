@@ -1,6 +1,6 @@
 from enum import Enum
 from kivy.uix.boxlayout import BoxLayout
-from paramboard.parameter_model import ParameterModel, ParamState
+from paramboard.parameter.parameter_model import ParameterModel, ParamState
 from kivy.uix.label import Label
 from kivy.uix.button import Button
 from kivy.uix.stacklayout import StackLayout

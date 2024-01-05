@@ -1,7 +1,7 @@
 from enum import Enum
 from functools import reduce
 from typing import Callable
-from paramboard.parameter_model import ParameterModel
+from paramboard.parameter.parameter_model import ParameterModel
 from kivy.clock import Clock
 
 class ButtonState(Enum):

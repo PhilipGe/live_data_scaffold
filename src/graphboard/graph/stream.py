@@ -2,7 +2,7 @@ from typing import Tuple, Callable
 from kivy.clock import Clock
 from kivy.garden.graph import Graph, MeshLinePlot
 
-class PlotModel: 
+class PointStream: 
 
     def __init__(self, stream: Callable[[],list[Tuple[int,int]]], poll_interval_s: int, cumulative, max_num_points, color):
         self.stream: Callable[[],list[Tuple[int,int]]] = stream
@@ -13,6 +13,11 @@ class PlotModel:
         self.color = color
 
         self.meshlineplot = None
+
+        self.minx = 0
+        self.maxx = 100
+        self.miny = 0
+        self.maxy = 100
 
     def attach_meshlineplot(self, meshlineplot: MeshLinePlot):
         self.meshlineplot = meshlineplot
@@ -25,9 +30,22 @@ class PlotModel:
         else:
             self.curr_data = relevant
 
+        self.update_mins_and_maxes()
+
         if(self.meshlineplot != None): 
             self.meshlineplot.points = self.curr_data
 
     def initiate_stream(self):
         self.new_data(self.stream())
         Clock.schedule_once(lambda dt: self.initiate_stream(), self.poll_interval_s)
+
+    def update_mins_and_maxes(self):
+        self.minx, self.miny = self.curr_data[0]
+        self.maxx, self.maxy = self.curr_data[0]
+
+        for x,y in self.curr_data:
+            if(x < self.minx): self.minx = x
+            elif(x > self.maxx): self.maxx = x
+
+            if(y < self.miny): self.miny = y
+            elif(y > self.maxy): self.maxy = y
